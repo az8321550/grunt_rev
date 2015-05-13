@@ -1,0 +1,16 @@
+@import url("import.css");
+
+.no{
+    color:#09f;
+    background: url("../images/img.jpg");
+}
+
+.icon1{
+    background: url("../images/sprite/ques.png");
+}
+.icon2{
+    background: url("../images/sprite/ques_sel.png");
+}
+.icon3{
+    background: url("../images/sprite/triangle.png");
+}

@@ -36,7 +36,8 @@ module.exports = function (grunt) {
         clean:{
             build:{
                 src:'<%= config.dist %>'
-            }
+            },
+            sprite:['<%= config.dist %>/images/sprite']
         },
         copy:{
             build:{
@@ -83,18 +84,38 @@ module.exports = function (grunt) {
                     dest: '<%= config.dist %>'
                 }]
             }
+        },
+        sprite: {
+            options: {
+                imagepath: '<%= config.dist %>/images/sprite',
+                spritedest: '<%= config.dist %>/images',
+                spritepath: null,
+                padding: 2,
+                algorithm: 'binary-tree',
+                engine: 'pixelsmith'
+            },
+            autoSprite: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= config.dist %>/styles',
+                    src: '*.css',
+                    dest: '<%= config.dist %>/styles'
+                }]
+            }
         }
     });
 
     grunt.registerTask('build', [
-        'clean',
+        'clean:build',
         'copy',
+        'sprite',
         'uglify',
         'cssmin',
         'useminPrepare',
         'rev',
         'usemin',
-        'htmlmin'
+        'htmlmin',
+        'clean:sprite',
     ]);
     grunt.registerTask('default',[
         'build'
